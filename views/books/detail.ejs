@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title><%- title %></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="container" style="margin-top: 50px;">
+
+	<% if (messages.error) { %>
+	<div class="alert alert-danger" role="alert"><%- messages.error %></div>
+	<% } %>
+
+    <div class="card"> 
+    	<div class="card-header">
+			Detail Book
+		</div>
+        <div class="card-body">
+            <form action="/books/detail/<%= id %>" method="GET">
+                <div class="form-group">
+                    <label>ID: <%= id %></label>
+                </div>
+                <div class="form-group">
+                    <label>Name: <%= name %></label>
+                </div>
+                <div class="form-group">
+                    <label>Author: <%= author %></label>
+                </div>
+                <div class="form-group">
+                    <!-- <input type="submit" class="btn btn-info" onclick="history.go(-1)" value="Back"/> -->
+                    <!-- <button onclick="history.back()">Back</button> -->
+                    <!-- <a onclick="history.back();">Back</a> -->
+                    <input type="button" value="Go back!" onclick="history.back()">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
