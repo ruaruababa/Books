@@ -8,11 +8,17 @@ const {
     bookEdit,
     bookEditPage,
     bookDelete,
-    bookDetail
+    bookDetail,
+    bookSearching,
+    home
 } = require('./controllers')
  
 // display books page
 router.get('/', bookPage);
+
+router.get('/books/index', home);
+
+router.post('/books/searching', bookSearching);
 
 //display detail book
 router.get('/books/detail/:id', bookDetail);

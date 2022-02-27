@@ -11,9 +11,14 @@ exports.bookPage = (req, res, next) => {
         } else {
             // render to views/books/index.ejs
             res.render('books',{data:rows});
-            console.log(rows);
+            // console.log(rows);
+            // return res.send(rows)
         }
     });
+}
+
+exports.home = (req, res, next) => {
+    res.redirect('/');
 }
 
 exports.bookDetail = (req, res, next) => {
@@ -50,9 +55,12 @@ exports.bookAddPage = (req, res, next) => {
     const name = req.body.name;
     const author = req.body.author;
     query = `INSERT INTO books(name, author) VALUES ('${name}', '${author}')`
-    dbConn.query(query, function (err, result) {
+    dbConn.query(query, function (err, results, fields) {
         if (err) throw err;
     // console.log('record inserted');
+    // res.status(200).json({
+    //     message: 'ok'
+    // });
     req.flash('messages', 'Data added successfully!');
     res.redirect('/')
     });
@@ -144,4 +152,21 @@ exports.bookDelete = (req, res, next) => {
             res.redirect('/')
         }
     })
+}
+
+exports.bookSearching = (req, res, next) => {
+    let name = req.body.name;
+    console.log(name);
+    dbConn.query(`SELECT * FROM books WHERE name='${name}'`, function(err,rows)     { 
+        if(err) {
+            req.flash('error', err);
+            // render to views/books/index.ejs
+            res.render('books',{data:''});   
+        } else {
+            // render to views/books/index.ejs
+            res.render('books',{data:rows});
+            // console.log(rows);
+            // return res.send(rows)
+        }
+    });
 }
